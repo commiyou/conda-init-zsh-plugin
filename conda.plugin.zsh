@@ -10,7 +10,7 @@ unset CONDA_SHLVL
 
 
 if [ -e "$CONDA_EXE" ]; then
-  path=( "${CONDA_EXE:A}" $path )
+  path=( "${CONDA_EXE:A:h}" $path )
 elif [ -d "$HOME/.miniconda3/bin/" ]; then
   path=( $path "$HOME/.miniconda3/bin" )
   export CONDA_EXE="$HOME/.miniconda3/bin/conda"
@@ -20,9 +20,9 @@ elif [ -d "/usr/local/miniconda3/" ]; then
 elif [ -d "$HOME/miniconda3/bin/" ]; then
   path=( $path "$HOME/miniconda3/bin" )
   export CONDA_EXE="$HOME/miniconda3/bin/conda"
-elif [ -d "$HOME/miniconda3/bin/" ]; then
-  path=( $path "$HOME/miniconda3/bin" )
-  export CONDA_EXE="$HOME/miniconda3/bin/conda"
+elif [ -d "$HOME/anaconda3/bin/" ]; then
+  path=( $path "$HOME/anaconda3/bin" )
+  export CONDA_EXE="$HOME/anaconda3/bin/conda"
 fi
 
 function _conda_initialize() {
