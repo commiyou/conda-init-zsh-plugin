@@ -2,19 +2,24 @@
 # copy from https://github.com/ryul99/.dotfiles/blob/da071a3186a4d4e3febe9bdd084705627f7f4060/home/.zshenv
 # Cleanup some anaconda environment variables to avoid messing up in tmux, etc.
 # (these environment variables might be copied and inherited unwantedly)
-unset CONDA_EXE
+#unset CONDA_EXE
 unset CONDA_PREFIX
 unset CONDA_DEFAULT_ENV
 unset CONDA_PYTHON_EXE
 unset CONDA_SHLVL
 
-# Miniconda3
-if [ -d "$HOME/.miniconda3/bin/" ]; then
+
+if [ -e "$CONDA_EXE" ]; then
+  path=( "${CONDA_EXE:A}" $path )
+elif [ -d "$HOME/.miniconda3/bin/" ]; then
   path=( $path "$HOME/.miniconda3/bin" )
   export CONDA_EXE="$HOME/.miniconda3/bin/conda"
 elif [ -d "/usr/local/miniconda3/" ]; then
   path=( $path "/usr/local/miniconda3/bin" )
   export CONDA_EXE="/usr/local/miniconda3/bin/conda"
+elif [ -d "$HOME/miniconda3/bin/" ]; then
+  path=( $path "$HOME/miniconda3/bin" )
+  export CONDA_EXE="$HOME/miniconda3/bin/conda"
 elif [ -d "$HOME/miniconda3/bin/" ]; then
   path=( $path "$HOME/miniconda3/bin" )
   export CONDA_EXE="$HOME/miniconda3/bin/conda"
